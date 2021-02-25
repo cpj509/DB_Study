@@ -1,5 +1,5 @@
---USER의 NAME을 보여줌.
+--사용자 보기
 SHOW USER;
 
---HR(USER) 계정의 잠금을 해제.
+--HR 스키마 계정 UNLOCK
 ALTER USER HR ACCOUNT UNLOCK IDENTIFIED BY 1234;
