@@ -51,3 +51,34 @@ from t_employee2;
 
 select max(first_name) 최대문자값, min(first_name) 최소문자값
 from t_employee2;
+
+--직무별 총 급여와 평균 출력하기
+select job_id, sum(salary) "직무 별 총 급여", avg(salary) "직무 별 평균 급여"
+from t_employee2
+group by job_id
+order by "직무 별 평균 급여" desc;
+
+--그룹 된 상태에서 조건을 처리 : HAVING절 
+select job_id, sum(salary) "직무 별 총 급여", avg(salary) "직무 별 평균 급여"
+from t_employee2
+group by job_id
+having sum(salary) >= 10000
+order by avg(salary) desc;
+
+--NVL 함수 : NULL 값을 처리
+select last_name, employee_id, NVL(manager_id, 0)
+from t_employee2;
+
+--실제 데이터 변경
+update t_employee2 set manager_id = 777
+where manager_id is null;
+
+commit;
+
+select first_name, salary * commission_pct
+from t_employee2;
+
+--commission_pct는 NULL인데 1을 대입해서 곱해줌.
+select first_name, salary * nvl(commission_pct, 1)
+from t_employee2
+order by salary * nvl(commission_pct, 1) desc;
