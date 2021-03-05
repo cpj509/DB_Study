@@ -9,6 +9,8 @@ create table t_address(
     primary key(num)
 );
 
+alter table t_address modify gender varchar(6);
+
 --시퀀스(일련번호) 생성
 create SEQUENCE abSeq
 INCREMENT by 1
@@ -17,5 +19,11 @@ MINVALUE  1
 MAXVALUE 100
 NOCYCLE
 NOCACHE;
+
+SELECT * FROM USER_SEQUENCES;
+
+alter SEQUENCE abSeq increment by 1;
+
+drop SEQUENCE abSeq;
 
 select * from t_address order by num;
