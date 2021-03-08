@@ -100,3 +100,15 @@ select last_name, department_id, salary 원래급여,
         else '미 인상'
     end 인상여부
 from t_employee2;
+
+--RANK() 함수 : 순위 매기기(직원의 급여로 순위 매기기)
+select first_name, salary, 
+        rank() over(order by salary desc) "급여순위 RANK",
+        dense_rank() over(order by salary desc) "급여순위 DENSE RANK"
+from employees;
+
+--부서별로 직원의 순위 매기기
+select department_id, first_name, salary,
+        rank() over(partition by department_id order by salary desc) 급여_RANK,
+        dense_rank() over(partition by department_id order by salary desc) 급여_DENSE_RANK
+from employees;
