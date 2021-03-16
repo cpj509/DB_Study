@@ -31,7 +31,18 @@ nocache;
 
 select * from t_member;
 select * from t_board;
+delete from t_board where memberId is null;
 
 rollback;
 
 commit;
+
+--외래키 제약 조건 삭제
+
+alter table t_board drop CONSTRAINT FK_MemberBoard;
+
+--외래키 제약 조건 : 연쇄적으로 삭제
+alter table t_board add constraint FK_MemberBoard foreign key(memberId)
+    references t_member(memberId) on delete cascade;
+    
+alter table t_board ADD (hit number(5));
